@@ -1,4 +1,4 @@
-FROM registry.devshift.net/osio-prod/base/golang:latest
+FROM registry.devshift.net/osio-prod/base/pcp:latest
 
 # Install packages necessary to run EAP
 RUN yum update -y && yum -y install xmlstarlet saxon augeas bsdtar unzip java-1.8.0-openjdk-devel && yum clean all
