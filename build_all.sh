@@ -17,4 +17,4 @@ for target in $(find . -type f -name Dockerfile | sort); do
 done
 
 # clean up stale images
-docker images -qf dangling=true | xargs docker rmi
+docker images -qf dangling=true | xargs --no-run-if-empty docker rmi
