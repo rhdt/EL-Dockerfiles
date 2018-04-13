@@ -8,8 +8,8 @@ BaseDir=`pwd`
 for target in $(ls -d build_order/* | xargs realpath); do
   cd $target
 
-  ImgTag=$(pwd | sed -e "s|${BaseDir}/||g" )
-  target="${PushReg}/${PushPath}/${ImgTag}:${PushTag}"
+  img_tag=$(pwd | sed -e "s|${BaseDir}/||g" )
+  target="${PushReg}/${PushPath}/${img_tag}:${PushTag}"
   docker build --pull -t ${target} .
   if [ $? -eq 0 ]; then
     docker push $target
