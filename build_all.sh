@@ -5,16 +5,16 @@ PushPath="osio-prod"
 PushTag="latest"
 BaseDir=`pwd`
 
-for target in $(find . -type f -name Dockerfile | sort); do 
-  cd `dirname $target`
-  img_tag=$(pwd | sed -e "s|${BaseDir}/||g" )
-  echo $img_tag
-  target="${PushReg}/${PushPath}/${img_tag}:${PushTag}"
-  docker build -t ${target} . 
+for target in `ls -d build_order/* | xargs realpath`; do
+  cd $target
+
+  ImgTag=$(pwd | sed -e "s|${BaseDir}/||g" )
+  target="${PushReg}/${PushPath}/${ImgTag}:${PushTag}"
+  echo docker build --pull -t ${target} .
   if [ $? -eq 0 ]; then
-    docker push $target
+    echo docker push $target
   fi
 done
 
 # clean up stale images
-docker images -qf dangling=true | xargs --no-run-if-empty docker rmi
+echo docker images -qf dangling=true | xargs --no-run-if-empty docker rmi
