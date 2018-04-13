@@ -10,9 +10,9 @@ for target in `ls -d build_order/* | xargs realpath`; do
 
   ImgTag=$(pwd | sed -e "s|${BaseDir}/||g" )
   target="${PushReg}/${PushPath}/${ImgTag}:${PushTag}"
-  echo docker build --pull -t ${target} .
+  docker build --pull -t ${target} .
   if [ $? -eq 0 ]; then
-    echo docker push $target
+    docker push $target
   fi
 done
 
