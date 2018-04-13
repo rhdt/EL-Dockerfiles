@@ -17,4 +17,4 @@ for target in `ls -d build_order/* | xargs realpath`; do
 done
 
 # clean up stale images
-echo docker images -qf dangling=true | xargs --no-run-if-empty docker rmi
+docker images -qf dangling=true | xargs --no-run-if-empty docker rmi
