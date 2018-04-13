@@ -1,16 +1,18 @@
 #!/bin/bash
 
+set -e
+
 PushReg="push.registry.devshift.net"
 PushPath="osio-prod"
 PushTag="latest"
 BaseDir=`pwd`
 
-for target in $(find . -type f -name Dockerfile | sort); do 
-  cd `dirname $target`
+for target in $(ls -d build_order/* | xargs realpath); do
+  cd $target
+
   img_tag=$(pwd | sed -e "s|${BaseDir}/||g" )
-  echo $img_tag
   target="${PushReg}/${PushPath}/${img_tag}:${PushTag}"
-  docker build -t ${target} . 
+  docker build --pull -t ${target} .
   if [ $? -eq 0 ]; then
     docker push $target
   fi
