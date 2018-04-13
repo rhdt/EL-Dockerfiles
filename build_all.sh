@@ -5,7 +5,7 @@ PushPath="osio-prod"
 PushTag="latest"
 BaseDir=`pwd`
 
-for target in `ls -d build_order/* | xargs realpath`; do
+for target in $(ls -d build_order/* | xargs realpath); do
   cd $target
 
   ImgTag=$(pwd | sed -e "s|${BaseDir}/||g" )
