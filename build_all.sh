@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 PushReg="push.registry.devshift.net"
 PushPath="osio-prod"
 PushTag="latest"
