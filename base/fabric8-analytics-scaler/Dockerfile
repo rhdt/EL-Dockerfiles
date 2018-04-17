@@ -1,0 +1,6 @@
+FROM registry.access.redhat.com/rhel7
+
+RUN  yum --setopt=tsflags=nodocs install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
+     yum --setopt=tsflags=nodocs install -y python34-pip wget python34-devel libxml2-devel libxslt-devel python34-requests python34-pycurl \
+                                           http://mirror.centos.org/centos/7.4.1708/paas/x86_64/openshift-origin/origin-clients-3.7.1-2.el7.x86_64.rpm && \
+    yum clean all
