@@ -1,7 +1,7 @@
 #!/bin/bash
 
 report_error() {
-    echo "ERROR building: $target"
+    echo "ERROR: $action"
 }
 
 trap report_error EXIT
@@ -14,6 +14,8 @@ PushTag="latest"
 BaseDir=`pwd`
 
 for target in $(ls -d build_order/* | xargs realpath); do
+  action="building $target"
+
   cd $target
 
   img_tag=$(pwd | sed -e "s|${BaseDir}/||g" )
@@ -25,4 +27,5 @@ for target in $(ls -d build_order/* | xargs realpath); do
 done
 
 # clean up stale images
+action="cleaning stale images"
 docker images -qf dangling=true | xargs --no-run-if-empty docker rmi
