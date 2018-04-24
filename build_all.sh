@@ -29,3 +29,6 @@ done
 # clean up stale images
 action="cleaning stale images"
 docker images -qf dangling=true | xargs --no-run-if-empty docker rmi
+
+trap - EXIT
+exit 0
