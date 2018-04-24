@@ -1,4 +1,4 @@
-#!/bin/bash
+#/bin/bash
 
 report_error() {
     echo "ERROR: $action"
@@ -6,14 +6,21 @@ report_error() {
 
 trap report_error EXIT
 
-set -e
+set -ex
 
 PushReg="push.registry.devshift.net"
 PushPath="osio-prod"
 PushTag="latest"
 BaseDir=`pwd`
 
-for target in $(ls -d build_order/* | xargs realpath); do
+action="calculate targets"
+if [ $# -eq 0 ]; then
+  targets=$(ls -d build_order/* | xargs realpath)
+else
+  targets=$(echo "$@" | xargs realpath)
+fi
+
+for target in "$targets"; do
   action="building $target"
 
   cd $target
