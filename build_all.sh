@@ -20,7 +20,7 @@ else
   targets=$(echo "$@" | xargs realpath)
 fi
 
-for target in "$targets"; do
+for target in $targets; do
   action="building $target"
 
   cd $target
