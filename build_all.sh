@@ -1,5 +1,11 @@
 #!/bin/bash
 
+report_error() {
+    echo "ERROR building: $target"
+}
+
+trap report_error EXIT
+
 set -e
 
 PushReg="push.registry.devshift.net"
