@@ -4,7 +4,7 @@ FROM prod.registry.devshift.net/osio-prod/base/pcp:latest
 RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
     yum-config-manager --enable rhel-7-server-optional-rpms && \
     yum update -y && \
-    yum -y install git xmlstarlet saxon augeas bsdtar unzip java-1.8.0-openjdk-devel && \
+    yum -y install git xmlstarlet saxon augeas bsdtar unzip java-1.8.0-openjdk-devel gettext && \
     yum clean all
 
 # Create a user and group used to launch processes
