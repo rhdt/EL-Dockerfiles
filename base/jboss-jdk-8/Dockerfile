@@ -1,7 +1,8 @@
 FROM prod.registry.devshift.net/osio-prod/base/pcp:latest
 
 # Install packages necessary to run EAP
-RUN yum-config-manager --enable rhel-7-server-optional-rpms && \
+RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
+    yum-config-manager --enable rhel-7-server-optional-rpms && \
     yum update -y && \
     yum -y install git xmlstarlet saxon augeas bsdtar unzip java-1.8.0-openjdk-devel && \
     yum clean all
