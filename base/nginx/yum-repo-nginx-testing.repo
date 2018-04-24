@@ -1,5 +1,0 @@
-[nginx-testing]
-name=nginx-testing
-baseurl=http://cbs.centos.org/repos/bananas7-testing/x86_64/os/
-enabled=0
-gpgcheck=0
