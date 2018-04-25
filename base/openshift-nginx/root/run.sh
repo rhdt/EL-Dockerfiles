@@ -1,6 +1,4 @@
 #!/bin/bash
-/template.sh /usr/share/nginx/html
-VARS='$PROXY_PASS_URL' /template.sh /etc/nginx/nginx.conf
 echo "----"
 id
 echo "----"
