@@ -1,20 +1,19 @@
 FROM registry.access.redhat.com/rhel7
-MAINTAINER Devtools <devtools@redhat.com>
-
-ENV LANG=en_US.utf8
-ENV FABRIC8_USER_NAME=fabric8
-
-ADD root /
+LABEL maintainer "Devtools <devtools@redhat.com>"
+LABEL author "Devtools <devtools@redhat.com>"
 
 RUN yum install --setopt=tsflags=nodocs -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
     yum -y install --setopt=tsflags=nodocs nginx gettext && \
     yum clean all && \
-    rm -f /usr/share/nginx/html/* && \
-    useradd --no-create-home -s /bin/bash ${FABRIC8_USER_NAME} && \
-    chmod -R 777 /run.sh /usr/share/nginx/html /run /var/log/nginx && \
-    chmod -R a+rw /etc/nginx
+    mkdir -p /usr/share/nginx/html
 
-USER ${FABRIC8_USER_NAME}
+ADD root /
+
+RUN chmod 777 /run.sh
+RUN chmod -R 777 /usr/share/nginx/html/
+RUN echo "nginx on CentOS7" > /usr/share/nginx/html/index.html
+RUN chmod 777 /run /var/log/nginx
 
 EXPOSE 8080
+USER 997
 ENTRYPOINT ["/run.sh"]
