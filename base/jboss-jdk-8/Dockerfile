@@ -1,7 +1,7 @@
 FROM registry.devshift.net/osio-prod/base/pcp:latest
 
 # Install packages necessary to run EAP
-RUN yum update -y && yum -y install git xmlstarlet saxon augeas bsdtar unzip java-1.8.0-openjdk-devel && yum clean all
+RUN yum update -y && yum -y install git xmlstarlet saxon augeas bsdtar unzip java-1.8.0-openjdk-devel openssl patch && yum clean all
 
 # Create a user and group used to launch processes
 # The user ID 1000 is the default for the first "regular" user on Fedora/RHEL,
