@@ -33,9 +33,9 @@ for target in $targets; do
   fi
 done
 
-# clean up stale images
-action="cleaning stale images"
-docker images -qf dangling=true | xargs --no-run-if-empty docker rmi || :
-
 trap - EXIT
-exit 0
+set +e
+
+# Clean up
+docker ps -aq -f status=exited|xargs --no-run-if-empty docker rm
+docker images -qf dangling=true | xargs --no-run-if-empty docker rmi
