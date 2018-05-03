@@ -8,7 +8,7 @@ HTTPD_WELCOME="/etc/httpd/conf.d/welcome.conf"
 INSTALL_PKGS="highlight httpd nss_wrapper gettext";
 
 # Setup necessary packages
-yum-config-manager --enablerepo=rhel-7-server-optional-rpms
+yum-config-manager --enable rhel-7-server-optional-rpms
 yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && yum -y install ${INSTALL_PKGS};
 
 # Fixup Configurations
