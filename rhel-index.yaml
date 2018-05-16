@@ -1,5 +1,5 @@
 - job:
-    name: test-job-name
+    name: test-job-name1
     project-type: freestyle
     defaults: global
     description: 'Do not edit this job through the web!'
