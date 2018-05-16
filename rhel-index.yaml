@@ -1,7 +1,11 @@
 - job:
-    name: test-job-name2
+    name: build-all-images
     project-type: freestyle
     defaults: global
     description: 'Do not edit this job through the web!'
-    display-name: 'Test job name'
-    concurrent: true
+    display-name: 'Build All Images'
+    concurrent: false
+    builders:
+        - shell: |
+            docker ps -a
+
