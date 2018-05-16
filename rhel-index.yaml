@@ -13,7 +13,7 @@
                 - master
     triggers:
         - pollscm:
-            cron: "*/3 * * * *"
+            cron: "H/3 * * * *"
     builders:
         - shell: |
             ./build_all.sh
