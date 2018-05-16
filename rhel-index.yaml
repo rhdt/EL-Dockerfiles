@@ -5,7 +5,16 @@
     description: 'Do not edit this job through the web!'
     display-name: 'Build All Images'
     concurrent: false
+    scm:
+        - git:
+            url: https://github.com/rhdt/EL-Dockerfiles.git
+            shallow_clone: true
+            branches:
+                - master
+    triggers:
+        - pollscm:
+            cron: "*/3 * * * *"
     builders:
         - shell: |
-            docker ps -a
+            ./build_all.sh
 
