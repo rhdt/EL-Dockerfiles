@@ -18,12 +18,13 @@
         - shell: |
             ./build_all.sh
 
-- job:
-    name: fabric8-analytics-data-model
+- job-template:
+    name: '{image_name}-rhel'
+    id: '{image_name}-rhel'
     project-type: freestyle
-    defaults: global
+    # defaults: global
     description: 'Do not edit this job through the web!'
-    display-name: 'fabric8-analytics-data-model'
+    display-name: '{image_name}'
     concurrent: false
     scm:
         - git:
@@ -33,17 +34,20 @@
                 - master
             sparse-checkout:
                 paths:
-                    - base/fabric8-analytics-data-model
+                    - 'base/{image_name}'
             included-regions:
-                - "base/fabric8-analytics-data-model/.*"
+                - "base/{image_name}/.*"
     triggers:
         - pollscm:
             cron: "H/3 * * * *"
     builders:
         - shell: |
-            PushReg="push.registry.devshift.net"
-            PushPath="osio-prod"
-            img_tag="base/fabric8-analytics-data-model"
-            PushTag="latest"
-            cd base/fabric8-analytics-data-model/
-            docker build --pull -t ${PushReg}/${PushPath}/${img_tag}:${PushTag} .
+            echo 'Building {image_name} image'
+            cd base/{image_name}/
+            docker build --pull -t push.registry.devshift.net/osio-prod/base/{image_name}:latest .
+
+- project:
+    name: rhel-images-build
+    jobs:
+        - '{image_name}-rhel':
+            image_name: 'fabric8-analytics-data-model'
