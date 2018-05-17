@@ -24,7 +24,7 @@
     project-type: freestyle
     # defaults: global
     description: 'Do not edit this job through the web!'
-    display-name: '{image_name}'
+    display-name: '{image_name}-rhel'
     concurrent: false
     scm:
         - git:
@@ -45,9 +45,30 @@
             echo 'Building {image_name} image'
             cd base/{image_name}/
             docker build --pull -t push.registry.devshift.net/osio-prod/base/{image_name}:latest .
+            #docker push push.registry.devshift.net/osio-prod/base/{image_name}:latest
 
 - project:
     name: rhel-images-build
     jobs:
         - '{image_name}-rhel':
             image_name: 'fabric8-analytics-data-model'
+        - '{image_name}-rhel':
+            image_name: 'fabric8-analytics-stack-report-ui'
+        - '{image_name}-rhel':
+            image_name: 'fabric8-analytics-stack-analysis-base'
+        - '{image_name}-rhel':
+            image_name: 'httpd'
+        - '{image_name}-rhel':
+            image_name: 'golang'
+        - '{image_name}-rhel':
+            image_name: 'openshift-nginx'
+        - '{image_name}-rhel':
+            image_name: 'pcp'
+        - '{image_name}-rhel':
+            image_name: 'python3'
+        - '{image_name}-rhel':
+            image_name: 'rhel'
+        - '{image_name}-rhel':
+            image_name: 'fabric8-analytics-scaler'
+        - '{image_name}-rhel':
+            image_name: 'fabric8-analytics-pgbouncer'
