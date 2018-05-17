@@ -43,7 +43,7 @@
         - shell: |
             PushReg="push.registry.devshift.net"
             PushPath="osio-prod"
-            img_tag="fabric8-analytics-data-model"
+            img_tag="base/fabric8-analytics-data-model"
             PushTag="latest"
             cd base/fabric8-analytics-data-model/
             docker build --pull -t ${PushReg}/${PushPath}/${img_tag}:${PushTag} .
