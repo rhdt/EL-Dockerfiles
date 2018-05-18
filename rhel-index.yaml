@@ -103,4 +103,4 @@
       - 'downstream-rhel':
           image_name: 'fabric8-analytics-jobs'
           branch_name: 'master'
-          parent_image: 'pcp'
+          parent_image: 'rhel-pcp-master'
