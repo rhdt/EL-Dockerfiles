@@ -22,7 +22,7 @@
     name: 'defaults'
     defaults: global
     project-type: freestyle
-    display-name: '{image_name}-rhel'
+    display-name: 'rhel-{image_name}-{branch_name}'
     description: 'Do not edit this job through the web!'
     concurrent: false
     scm:
