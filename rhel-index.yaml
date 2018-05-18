@@ -132,3 +132,19 @@
           image_name: 'python2'
           branch_name: 'master'
           parent_job: 'rhel-pcp-master'
+      - 'downstream-rhel':
+          image_name: 'nginx-redirector'
+          branch_name: 'master'
+          parent_job: 'rhel-openshift-nginx-master'
+      - 'downstream-rhel':
+          image_name: 'status-api'
+          branch_name: 'master'
+          parent_job: 'rhel-openshift-nginx-master'
+      - 'downstream-rhel':
+          image_name: 'fabric8-openshift-nginx'
+          branch_name: 'master'
+          parent_job: 'rhel-openshift-nginx-master'
+      - 'downstream-rhel':
+          image_name: 'rh-che'
+          branch_name: 'master'
+          parent_job: 'rhel-jboss-jdk-8-master'
