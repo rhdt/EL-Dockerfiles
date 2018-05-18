@@ -60,7 +60,7 @@
           cron: "H/3 * * * *"
       - reverse:
           jobs:
-            - '{parent_image}'
+            - '{parent_job}'
           result: 'success'
     <<: *job_defaults
 
@@ -103,4 +103,32 @@
       - 'downstream-rhel':
           image_name: 'fabric8-analytics-jobs'
           branch_name: 'master'
-          parent_image: 'rhel-pcp-master'
+          parent_job: 'rhel-pcp-master'
+      - 'downstream-rhel':
+          image_name: 'fabric8-analytics-server'
+          branch_name: 'master'
+          parent_job: 'rhel-pcp-master'
+      - 'downstream-rhel':
+          image_name: 'fabric8-analytics-worker'
+          branch_name: 'master'
+          parent_job: 'rhel-pcp-master'
+      - 'downstream-rhel':
+          image_name: 'jboss-jdk-8'
+          branch_name: 'master'
+          parent_job: 'rhel-pcp-master'
+      - 'downstream-rhel':
+          image_name: 'mattermost'
+          branch_name: 'master'
+          parent_job: 'rhel-pcp-master'
+      - 'downstream-rhel':
+          image_name: 'nodejs'
+          branch_name: 'master'
+          parent_job: 'rhel-pcp-master'
+      - 'downstream-rhel':
+          image_name: 'osd-loggers'
+          branch_name: 'master'
+          parent_job: 'rhel-pcp-master'
+      - 'downstream-rhel':
+          image_name: 'python2'
+          branch_name: 'master'
+          parent_job: 'rhel-pcp-master'
