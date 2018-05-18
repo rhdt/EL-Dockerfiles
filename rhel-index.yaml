@@ -22,7 +22,7 @@
     name: '{image_name}-rhel'
     id: '{image_name}-rhel'
     project-type: freestyle
-    # defaults: global
+    defaults: global
     description: 'Do not edit this job through the web!'
     display-name: '{image_name}-rhel'
     concurrent: false
@@ -38,6 +38,7 @@
             included-regions:
                 - "base/{image_name}/.*"
     triggers:
+        - timed: @weekly
         - pollscm:
             cron: "H/3 * * * *"
     builders:
