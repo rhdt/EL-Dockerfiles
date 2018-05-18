@@ -38,7 +38,7 @@
             included-regions:
                 - "base/{image_name}/.*"
     triggers:
-        - timed: @weekly
+        - timed: "@weekly"
         - pollscm:
             cron: "H/3 * * * *"
     builders:
