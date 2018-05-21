@@ -6,7 +6,7 @@
         - kbsingh
 
 - prcheck_defaults: &prcheck_defaults
-    name: '{name}-prcheck'
+    name: 'pr-check-defaults'
     triggers:
       - github-pull-request:
           status-context: "rhel ci PR build"
@@ -29,7 +29,7 @@
 
 - job:
     name: 'rhel-images-prcheck'
-    id: 'rhel-images-pr-check'
+    display-name: 'rhel-images-prcheck'
     builders:
       - shell: |
           #!/bin/bash
