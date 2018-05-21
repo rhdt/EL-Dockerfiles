@@ -15,12 +15,6 @@
     allow-whitelist-orgs-as-admins: true
     status-context: "rhel ci PR build"
 
-- trigger:
-    name: githubprb
-    triggers:
-      - github-pull-request:
-          <<: *github_pull_request_defaults
-
 - prcheck_defaults: &prcheck_defaults
     name: '{name}-prcheck'
     triggers:
