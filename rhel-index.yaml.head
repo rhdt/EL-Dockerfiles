@@ -1,23 +1,6 @@
-- admin_list_defaults: &admin_list_defaults
-    name: 'admin_list_defaults'
-    admin-list:
-        - jmelis
-        - riuvshin
-        - kbsingh
-
-- prcheck_defaults: &prcheck_defaults
-    name: 'pr-check-defaults'
-    triggers:
-      - github-pull-request:
-          status-context: "rhel ci PR build"
-          <<: *admin_list_defaults
-          cron: '* * * * *'
-          github-hooks: true
-          permit-all: false
-          trigger-phrase: '.*\[test\].*'
-          allow-whitelist-orgs-as-admins: true
-          status-context: "rhel ci PR build"
-
+- job:
+    name: 'EL-Dockerfiles-pr-check'
+    display-name: 'EL-Dockerfiles-pr-check'
     scm:
         - git:
             url: https://github.com/rhdt/EL-Dockerfiles.git
@@ -26,21 +9,21 @@
             refspec: '+refs/pull/*:refs/remotes/origin/pr/*'
             branches:
                 - '${{ghprbActualCommit}}'
-
-- job:
-    name: 'rhel-images-prcheck'
-    display-name: 'rhel-images-prcheck'
+    triggers:
+      - github-pull-request:
+          status-context: "rhel ci PR build"
+          admin-list:
+              - jmelis
+              - riuvshin
+              - kbsingh
+          cron: '* * * * *'
+          github-hooks: true
+          permit-all: false
+          trigger-phrase: '.*\[test\].*'
+          allow-whitelist-orgs-as-admins: true
+          status-context: "rhel ci PR build"
     builders:
-      - shell: |
-          #!/bin/bash
-          set -ex
-          for target in $(ls -d build_order/* | xargs realpath); do
-            cd $target
-            img_tag=$(pwd | sed -e "s|$(pwd)/||g" )
-            echo "Building $img_tag"
-            docker build --pull -t push.registry.devshift.net/osio-prod/$img_tag:latest .
-          done
-    <<: *prcheck_defaults
+      - shell: ./pr_check.sh
 
 - job_defaults: &job_defaults
     name: 'defaults'
