@@ -1,3 +1,30 @@
+- job:
+    name: 'EL-Dockerfiles-pr-check'
+    display-name: 'EL-Dockerfiles-pr-check'
+    scm:
+        - git:
+            url: https://github.com/rhdt/EL-Dockerfiles.git
+            # credentials-id: ""
+            skip-tag: True
+            refspec: '+refs/pull/*:refs/remotes/origin/pr/*'
+            branches:
+                - '${{ghprbActualCommit}}'
+    triggers:
+      - github-pull-request:
+          status-context: "rhel ci PR build"
+          admin-list:
+              - jmelis
+              - riuvshin
+              - kbsingh
+          cron: '* * * * *'
+          github-hooks: true
+          permit-all: false
+          trigger-phrase: '.*\[test\].*'
+          allow-whitelist-orgs-as-admins: true
+          status-context: "rhel ci PR build"
+    builders:
+      - shell: ./pr_check.sh
+
 - job_defaults: &job_defaults
     name: 'defaults'
     defaults: global
@@ -18,6 +45,8 @@
             - 'base/{image_name}/.*'
     builders:
       - shell: |
+          #!/bin/bash
+          set -ex
           echo 'Building {image_name} image'
           cd base/{image_name}/
           docker build --pull -t push.registry.devshift.net/osio-prod/base/{image_name}:latest .
