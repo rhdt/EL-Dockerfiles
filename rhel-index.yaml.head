@@ -30,7 +30,7 @@
             branches:
                 - '${{ghprbActualCommit}}'
 
-- job-template:
+- job:
     name: 'rhel-images-prcheck'
     id: 'rhel-images-pr-check'
     builders:
@@ -92,8 +92,3 @@
             - '{parent_job}'
           result: 'success'
     <<: *job_defaults
-
-- project:
-    name: rhel-pr-checks
-    jobs:
-      - rhel-images-pr-check
