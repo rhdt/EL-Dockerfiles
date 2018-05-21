@@ -1,0 +1,45 @@
+- job_defaults: &job_defaults
+    name: 'defaults'
+    defaults: global
+    project-type: freestyle
+    display-name: 'rhel-{image_name}-{branch_name}'
+    description: 'Do not edit this job through the web!'
+    concurrent: false
+    scm:
+      - git:
+          url: https://github.com/rhdt/EL-Dockerfiles.git
+          shallow_clone: true
+          branches:
+            - '{branch_name}'
+          sparse-checkout:
+            paths:
+              - 'base/{image_name}'
+          included-regions:
+            - 'base/{image_name}/.*'
+    builders:
+      - shell: |
+          echo 'Building {image_name} image'
+          cd base/{image_name}/
+          docker build --pull -t push.registry.devshift.net/osio-prod/base/{image_name}:latest .
+          docker push push.registry.devshift.net/osio-prod/base/{image_name}:latest
+
+- job-template:
+    name: 'rhel-{image_name}-{branch_name}'
+    id: 'base-rhel'
+    triggers:
+      - timed: "@weekly"
+      - pollscm:
+          cron: "H/3 * * * *"
+    <<: *job_defaults
+
+- job-template:
+    name: 'rhel-{image_name}-{branch_name}'
+    id: 'downstream-rhel'
+    triggers:
+      - pollscm:
+          cron: "H/3 * * * *"
+      - reverse:
+          jobs:
+            - '{parent_job}'
+          result: 'success'
+    <<: *job_defaults
