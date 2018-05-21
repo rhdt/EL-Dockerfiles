@@ -8,12 +8,10 @@ set -ex
 
 # change tags in dockerfiles
 sed -i '' -e "s#:latest#:${ghprbActualCommit}#g" base/**/Dockerfile
-# change registry url in dockerfiles
-sed -i '' -e "s#FROM prod.#FROM push.#g" base/**/Dockerfile
 
 for target in $(ls -d build_order/* | xargs realpath); do
   cd $target
   img_tag=$(pwd | sed -e "s|$(pwd)/||g" )
   echo "Building $img_tag"
-  docker build -t push.registry.devshift.net/osio-prod/$img_tag:test-${ghprbActualCommit} .
+  docker build -t prod.registry.devshift.net/osio-prod/$img_tag:test-${ghprbActualCommit} .
 done
