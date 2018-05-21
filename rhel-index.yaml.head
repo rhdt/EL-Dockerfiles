@@ -1,5 +1,8 @@
 - job:
     name: 'EL-Dockerfiles-pr-check'
+    properties:
+        - github:
+            url: https://github.com/rhdt/EL-Dockerfiles
     display-name: 'EL-Dockerfiles-pr-check'
     scm:
         - git:
@@ -8,7 +11,7 @@
             skip-tag: True
             refspec: '+refs/pull/*:refs/remotes/origin/pr/*'
             branches:
-                - '${{ghprbActualCommit}}'
+                - '${ghprbActualCommit}'
     triggers:
       - github-pull-request:
           status-context: "rhel ci PR build"
@@ -17,7 +20,7 @@
               - riuvshin
               - kbsingh
           cron: '* * * * *'
-          github-hooks: true
+          github-hooks: false
           permit-all: false
           trigger-phrase: '.*\[test\].*'
           allow-whitelist-orgs-as-admins: true
