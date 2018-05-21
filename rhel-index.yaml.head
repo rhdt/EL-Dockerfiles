@@ -20,7 +20,7 @@
               - riuvshin
               - kbsingh
           cron: '* * * * *'
-          github-hooks: true
+          github-hooks: false
           permit-all: false
           trigger-phrase: '.*\[test\].*'
           allow-whitelist-orgs-as-admins: true

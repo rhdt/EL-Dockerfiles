@@ -7,7 +7,7 @@ set -ex
 /var/lib/jenkins/.local/bin/jenkins-jobs test test.yaml
 
 # change tags in dockerfiles
-sed -i '' -e "s#:latest#:${ghprbActualCommit}#g" base/**/Dockerfile
+sed -i -e "s#:latest#:${ghprbActualCommit}#g" base/**/Dockerfile
 
 for target in $(ls -d build_order/* | xargs realpath); do
   cd $target
