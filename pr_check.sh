@@ -11,7 +11,7 @@ sed -i -e "s#:latest#:${ghprbActualCommit}#g" base/**/Dockerfile
 
 for target in $(ls -d build_order/* | xargs realpath); do
   cd $target
-  img_tag=$(pwd | sed -e "s|$(pwd)/||g" )
+  img_tag=$(basename $PWD)
   echo "Building $img_tag"
-  docker build -t prod.registry.devshift.net/osio-prod/$img_tag:test-${ghprbActualCommit} .
+  docker build -t prod.registry.devshift.net/osio-prod/base/$img_tag:test-${ghprbActualCommit} .
 done
