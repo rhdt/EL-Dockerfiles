@@ -5,22 +5,19 @@
         - riuvshin
         - kbsingh
 
-- github_pull_request_defaults: &github_pull_request_defaults
-    name: 'github_pull_request_defaults'
-    <<: *admin_list_defaults
-    cron: '* * * * *'
-    github-hooks: true
-    permit-all: false
-    trigger-phrase: '.*\[test\].*'
-    allow-whitelist-orgs-as-admins: true
-    status-context: "rhel ci PR build"
-
 - prcheck_defaults: &prcheck_defaults
     name: '{name}-prcheck'
     triggers:
       - github-pull-request:
           status-context: "rhel ci PR build"
-          <<: *github_pull_request_defaults
+          <<: *admin_list_defaults
+          cron: '* * * * *'
+          github-hooks: true
+          permit-all: false
+          trigger-phrase: '.*\[test\].*'
+          allow-whitelist-orgs-as-admins: true
+          status-context: "rhel ci PR build"
+
     scm:
         - git:
             url: https://github.com/rhdt/EL-Dockerfiles.git
