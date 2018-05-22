@@ -13,5 +13,8 @@ for target in $(ls -d build_order/* | xargs realpath); do
   cd $target
   img_tag=$(basename $PWD)
   echo "Building $img_tag"
-  docker build -t prod.registry.devshift.net/osio-prod/base/$img_tag:test-${ghprbActualCommit} .
+  docker build -t prod.registry.devshift.net/osio-prod/base/$img_tag:${ghprbActualCommit} .
 done
+
+# clean up
+docker rmi -f $(docker images --filter "dangling=true" -q --no-trunc) || true
