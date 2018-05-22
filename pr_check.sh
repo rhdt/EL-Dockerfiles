@@ -16,6 +16,5 @@ for target in $(ls -d build_order/* | xargs realpath); do
   docker build -t prod.registry.devshift.net/osio-prod/base/$img_tag:${ghprbActualCommit} .
 done
 
-
 # clean up
 docker rmi -f $(docker images --filter "dangling=true" -q --no-trunc) || true
