@@ -19,6 +19,7 @@
               - jmelis
               - riuvshin
               - kbsingh
+              - rh-devtools-bot
           cron: '* * * * *'
           github-hooks: false
           permit-all: false
