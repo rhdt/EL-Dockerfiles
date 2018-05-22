@@ -19,4 +19,4 @@ done
 
 # clean up
 docker rmi -f $(docker images --filter "dangling=true" -q --no-trunc)
-docker rmi -f $(docker images | grep ${ghprbActualCommit} | tr -s ' ' | cut -d ' ' -f 3)
+docker rmi -f $(docker images | grep ${ghprbActualCommit} | tr -s ' ' | cut -d ' ' -f 3) || true
