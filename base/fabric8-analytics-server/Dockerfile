@@ -1,4 +1,4 @@
-FROM quay.io/openshiftio/base-pcp:latest
+FROM quay.io/openshiftio/rhel-base-pcp:latest
 
 COPY hack/_copr_jpopelka-mercator.repo /etc/yum.repos.d/
 

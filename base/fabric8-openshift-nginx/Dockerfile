@@ -1,4 +1,4 @@
-FROM quay.io/openshiftio/base-openshift-nginx:latest
+FROM quay.io/openshiftio/rhel-base-openshift-nginx:latest
 LABEL maintainer "Devtools <devtools@redhat.com>"
 LABEL author "Devtools <devtools@redhat.com>"
 

@@ -1,4 +1,4 @@
-FROM quay.io/openshiftio/base-pcp:latest
+FROM quay.io/openshiftio/rhel-base-pcp:latest
 
 RUN chown -R 1000 /etc/pcp /var/run/pcp /var/lib/pcp /var/log/pcp  &&\
     chmod -R ug+rw /etc/pcp /var/run/pcp /var/lib/pcp /var/log/pcp
