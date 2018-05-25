@@ -1,4 +1,4 @@
-FROM prod.registry.devshift.net/osio-prod/base/pcp:latest
+FROM quay.io/openshiftio/base-pcp:latest
 
 # https://copr.fedorainfracloud.org/coprs/jpopelka/mercator/
 # https://copr.fedorainfracloud.org/coprs/fche/pcp/

@@ -1,40 +1,34 @@
 #/bin/bash
 
-report_error() {
-    echo "ERROR: $action"
-}
-
-trap report_error EXIT
-
 set -ex
 
-PushReg="push.registry.devshift.net"
-PushPath="osio-prod"
-PushTag="latest"
-BaseDir=`pwd`
+DEVSHIFT="push.registry.devshift.net/osio-prod"
+QUAY="quay.io/openshiftio"
 
-action="calculate targets"
+PUSH_TAG="latest"
+BASE_DIR=`pwd`
+
 if [ $# -eq 0 ]; then
-  targets=$(ls -d build_order/* | xargs realpath)
+  TARGETS=$(ls -d build_order/* | xargs realpath)
 else
-  targets=$(echo "$@" | xargs realpath)
+  TARGETS=$(echo "$@" | xargs realpath)
 fi
 
-for target in $targets; do
-  action="building $target"
+for TARGET in $TARGETS; do
+  cd $TARGET
 
-  cd $target
+  DEVSHIFT_TAG=${PWD##$BASE_DIR/}
+  QUAY_TAG=${DEVSHIFT_TAG//\//-}
 
-  img_tag=$(pwd | sed -e "s|${BaseDir}/||g" )
-  target="${PushReg}/${PushPath}/${img_tag}:${PushTag}"
-  docker build --pull -t ${target} .
+  TARGET_DEVSHIFT="${DEVSHIFT}/${DEVSHIFT_TAG}:${PUSH_TAG}"
+  TARGET_QUAY="${QUAY}/${QUAY_TAG}:${PUSH_TAG}"
+
+  docker build --pull -t "${TARGET_DEVSHIFT}" -t "${TARGET_QUAY}" .
   if [ $? -eq 0 ]; then
-    docker push $target
+    docker push $TARGET_DEVSHIFT
+    docker push $TARGET_QUAY
   fi
 done
-
-trap - EXIT
-set +e
 
 # Clean up
 docker ps -aq -f status=exited|xargs --no-run-if-empty docker rm
