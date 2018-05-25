@@ -18,13 +18,12 @@ for filename in glob.glob("base/*/Dockerfile"):
     docker_from_split = docker_from.split("/")
 
     docker_from_registry = docker_from_split[0]
-    docker_from_image_name = docker_from_split[-1].split(':')[0]
 
     job = {'image_name': image_name, 'branch_name': 'master'}
 
     if docker_from_registry == "quay.io":
         kind = "downstream-rhel"
-        job['parent_job'] = '%s-master' % (docker_from_image_name,)
+        job['parent_job'] = 'rhel-%s-master' % (image_name,)
     else:
         kind = "base-rhel"
 
