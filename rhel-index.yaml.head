@@ -74,6 +74,7 @@
 - job-template:
     name: 'rhel-{image_name}-{branch_name}'
     id: 'downstream-rhel'
+    display-name: 'rhel-{image_name}-{branch_name}-downstream'
     triggers:
       - pollscm:
           cron: "H/3 * * * *"
