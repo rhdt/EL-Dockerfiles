@@ -13,7 +13,7 @@ for target in $(ls -d build_order/* | xargs realpath); do
   cd $target
   img_tag=$(basename $PWD)
   echo "Building $img_tag"
-  docker build -t "quay.io/openshiftio/base-${img_tag}:${ghprbActualCommit}" .
+  docker build -t "quay.io/openshiftio/rhel-base-${img_tag}:${ghprbActualCommit}" .
 done
 
 # clean up

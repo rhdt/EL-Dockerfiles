@@ -53,12 +53,15 @@
           set -ex
           echo 'Building {image_name} image'
           cd base/{image_name}/
+
           docker build --pull \
             -t push.registry.devshift.net/osio-prod/base/{image_name}:latest \
-            -t quay.io/openshiftio/base-{image_name}:latest \
+            -t quay.io/openshiftio/rhel-base-{image_name}:latest \
             .
-          docker push push.registry.devshift.net/osio-prod/base/{image_name}:latest
-          docker push quay.io/openshiftio/base-{image_name}:latest
+
+          docker push \
+            push.registry.devshift.net/osio-prod/base/{image_name}:latest \
+            quay.io/openshiftio/rhel-base-{image_name}:latest
 
 - job-template:
     name: 'rhel-{image_name}-{branch_name}'

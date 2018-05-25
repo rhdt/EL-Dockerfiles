@@ -25,8 +25,7 @@ for TARGET in $TARGETS; do
 
   docker build --pull -t "${TARGET_DEVSHIFT}" -t "${TARGET_QUAY}" .
   if [ $? -eq 0 ]; then
-    docker push $TARGET_DEVSHIFT
-    docker push $TARGET_QUAY
+    docker push $TARGET_DEVSHIFT $TARGET_QUAY
   fi
 done
 
