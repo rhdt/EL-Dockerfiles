@@ -8,4 +8,3 @@ RUN yum install -y pcp pcp-pmda-prometheus pcp-manager pcp-debuginfo \
     mkdir -p /etc/pcp /var/run/pcp /var/lib/pcp /var/log/pcp  && \
     chgrp -R root /etc/pcp /var/run/pcp /var/lib/pcp /var/log/pcp && \
     chmod -R g+rwX /etc/pcp /var/run/pcp /var/lib/pcp /var/log/pcp
-
