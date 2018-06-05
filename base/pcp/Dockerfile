@@ -9,7 +9,9 @@ ENV PCP_DIRS="/etc/pcp /var/run/pcp /var/lib/pcp /var/log/pcp"
 
 COPY pcp.repo /etc/yum.repos.d/pcp.repo
 
-RUN yum -y update && yum install -y $PCP_PACKAGES && yum clean all && \
+RUN yum -y update && \
+    yum install -y $PCP_PACKAGES && \
+    yum clean all && \
     mkdir -p $PCP_DIRS  && \
     chgrp -R root $PCP_DIRS && \
     chmod -R g+rwX $PCP_DIRS
