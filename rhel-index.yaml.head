@@ -48,7 +48,12 @@
           included-regions:
             - 'base/{image_name}/.*'
     builders:
-      - shell: ./build_push.sh {image_name}
+      - shell: |
+        if [ ! -f "build_push.sh" ]; then
+          git show HEAD:build_push.sh > build_push.sh
+          chmod +x build_push.sh
+        fi
+        ./build_push.sh {image_name}
 - job-template:
     name: 'rhel-{image_name}-{branch_name}'
     id: 'base-rhel'
