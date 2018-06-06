@@ -9,7 +9,9 @@ echo "Building ${IMAGE_NAME} image"
 cd base/${IMAGE_NAME}/
 
 if [[ "$GIT_COMMIT" != "$GIT_PREVIOUS_COMMIT" ]]; then
-  NO_CACHE_CMD="--no-cache"
+  NO_CACHE_CMD="--no-cache=true"
+else
+  NO_CACHE_CMD="--no-cache=false"
 fi
 
 DEVSHIFT_TAG="push.registry.devshift.net/osio-prod/base/${IMAGE_NAME}:latest"
