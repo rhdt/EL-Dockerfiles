@@ -1,7 +1,7 @@
 #!/usr/bin/sh -e
 
 # Required by Dockerfile or any built-time script in hack/
-BUILD="python34-pip python2-pip wget"
+BUILD="python34-pip python2-pip wget which"
 
 # - We need postgresql-devel and python3-devel for psycopg2 listed in f8a_worker/requirements.txt
 # - We cannot use requests from PyPI since it does not allow us to use own certificates
@@ -20,37 +20,25 @@ PROCESS_PY='git unzip zip tar file findutils npm'
 # DigesterTask
 DIGESTER='ssdeep'
 
-# github-linguist (languages)
-# LINGUIST='rubygems ruby-devel'
-
-# oscryptocatcher check from copr repo
-# OSCRYPTOCATCHER='oscryptocatcher'
-
-# covscan
-# CSMOCK_TASK_DEPS="csmock"
-
 # mercator-go
-MERCATOR="mercator-1-25.el7.centos.x86_64"
-
-# CodeMetricsTask - it requires python-pip, since we'll be installing mccabe for both Python 2 and 3
-# CODE_METRICS="cloc python-pip"
-
-# OWASP dependency-check used by CVEcheckerTask
-DEPENDENCY_CHECK="which"
+MERCATOR="mercator-1-27.el7.x86_64"
 
 GOLANG_SUPPORT="golang"
 
 # for pcp pmcd metrics collector
 PCP="pcp"
 
-
 # tagger uses python wrapper above libarchive so install it explicitly
 TAGGER_DEP="libarchive"
 
 # Install all RPM deps
-yum install -y --setopt=tsflags=nodocs ${BUILD} ${REQUIREMENTS_TXT} \
-                ${DB_MIGRATIONS} ${PROCESS_PY} \
-                ${DIGESTER} ${LINGUIST} \
-                ${OSCRYPTOCATCHER} ${CSMOCK_TASK_DEPS} \
-                ${BD_DEPS} ${BREWUTILS} ${MERCATOR} ${CODE_METRICS} \
-                ${DEPENDENCY_CHECK} ${GOLANG_SUPPORT} ${PCP} ${TAGGER_DEP}
+yum install -y --setopt=tsflags=nodocs \
+    ${BUILD} \
+    ${REQUIREMENTS_TXT} \
+    ${DB_MIGRATIONS} \
+    ${PROCESS_PY} \
+    ${DIGESTER} \
+    ${MERCATOR} \
+    ${GOLANG_SUPPORT} \
+    ${PCP} \
+    ${TAGGER_DEP}
