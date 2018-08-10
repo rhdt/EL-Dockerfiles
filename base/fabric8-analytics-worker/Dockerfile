@@ -2,7 +2,7 @@ FROM quay.io/openshiftio/rhel-base-pcp:latest
 
 # https://copr.fedorainfracloud.org/coprs/msrb/mercator/
 # https://copr.fedorainfracloud.org/coprs/fche/pcp/
-COPY hack/_copr_fche_pcp.repo hack/_copr_msrb-mercator.repo /etc/yum.repos.d/
+COPY hack/_copr_fche_pcp.repo hack/_copr_msrb-mercator-epel-7.repo /etc/yum.repos.d/
 
 # Install RPM dependencies
 COPY hack/install_deps_rpm.sh /tmp/install_deps/
