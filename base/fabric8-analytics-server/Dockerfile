@@ -1,6 +1,6 @@
 FROM quay.io/openshiftio/rhel-base-pcp:latest
 
-COPY hack/_copr_jpopelka-mercator.repo /etc/yum.repos.d/
+COPY hack/_copr_msrb-mercator.repo /etc/yum.repos.d/
 
 # python3-pycurl is needed for Amazon SQS (boto lib), we need CentOS' rpm - installing it from pip results in NSS errors
 RUN yum-config-manager --enable rhel-7-server-optional-rpms && \
