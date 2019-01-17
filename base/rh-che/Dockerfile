@@ -6,7 +6,7 @@ RUN localedef -i en_US -f UTF-8 C.UTF-8
 
 RUN yum -y update && \
     yum -y install sudo && \
-    yum -y install containers-common && \
+    yum -y install rhel-7-server-extras-rpms && \
     curl -sSL "https://get.docker.com/builds/Linux/x86_64/docker-1.6.0" -o /usr/bin/docker && \
     chmod +x /usr/bin/docker && \
     yum clean all && \
