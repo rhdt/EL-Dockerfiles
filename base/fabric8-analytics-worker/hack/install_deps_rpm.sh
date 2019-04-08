@@ -1,7 +1,7 @@
 #!/usr/bin/sh -e
 
 # Required by Dockerfile or any built-time script in hack/
-BUILD="python34-pip python2-pip wget which"
+BUILD="python36-pip python3-pip wget which"
 
 # - We need postgresql-devel and python3-devel for psycopg2 listed in f8a_worker/requirements.txt
 # - We cannot use requests from PyPI since it does not allow us to use own certificates
@@ -9,7 +9,7 @@ BUILD="python34-pip python2-pip wget which"
 # - Installing python-requests is a work-around for a conflict which happens when you do
 #   'pip install requests; yum install python-requests' (while it's OK if you swap those)
 #   It can be removed once gofedlib runs on Python 3.
-REQUIREMENTS_TXT='postgresql-devel python34-devel libxml2-devel libxslt-devel python34-requests python-requests python34-pycurl patch'
+REQUIREMENTS_TXT='postgresql-devel python36-devel libxml2-devel libxslt-devel python36-requests python-requests python36-pycurl patch'
 
 # hack/run-db-migrations.sh
 DB_MIGRATIONS='postgresql'
