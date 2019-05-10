@@ -1,7 +1,7 @@
 #!/usr/bin/sh -e
 
 # Required by Dockerfile or any built-time script in hack/
-BUILD="python36-pip python3-pip wget which"
+BUILD="python36-pip python2-pip wget which"
 
 # - We need postgresql-devel and python3-devel for psycopg2 listed in f8a_worker/requirements.txt
 # - We cannot use requests from PyPI since it does not allow us to use own certificates
