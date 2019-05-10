@@ -21,7 +21,7 @@ PROCESS_PY='git unzip zip tar file findutils npm'
 DIGESTER='ssdeep'
 
 # mercator-go
-MERCATOR="mercator-1-27.el7.x86_64"
+MERCATOR="mercator-1-33.el7.x86_64"
 
 GOLANG_SUPPORT="golang"
 
