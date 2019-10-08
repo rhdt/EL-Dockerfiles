@@ -2,7 +2,6 @@
 
 set -ex
 
-DEVSHIFT="push.registry.devshift.net/osio-prod"
 QUAY="quay.io/openshiftio"
 
 PUSH_TAG="latest"
@@ -17,15 +16,13 @@ fi
 for TARGET in $TARGETS; do
   cd $TARGET
 
-  DEVSHIFT_IMAGE="${PWD##$BASE_DIR/}"
-  QUAY_IMAGE="rhel-${DEVSHIFT_IMAGE//\//-}"
+  IMAGE_NAME="${PWD##$BASE_DIR/}"
+  QUAY_IMAGE="rhel-${IMAGE_NAME//\//-}"
 
-  TARGET_DEVSHIFT="${DEVSHIFT}/${DEVSHIFT_IMAGE}:${PUSH_TAG}"
   TARGET_QUAY="${QUAY}/${QUAY_IMAGE}:${PUSH_TAG}"
 
-  docker build --pull -t "${TARGET_DEVSHIFT}" -t "${TARGET_QUAY}" .
+  docker build --pull -t "${TARGET_QUAY}" .
   if [ $? -eq 0 ]; then
-    docker push $TARGET_DEVSHIFT
     docker push $TARGET_QUAY
   fi
 done
