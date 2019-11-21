@@ -7,4 +7,4 @@ RUN yum-config-manager --enable rhel-7-server-optional-rpms && \
     yum clean all
 
 # Verify packages are installed
-RUN rpm -q --queryformat "" python36-pip wget python36-devel libxml2-devel libxslt-devel python36-requests python36-pycurl origin-clients
+RUN rpm -q --queryformat "" python3-pip wget python3-devel libxml2-devel libxslt-devel python36-requests python36-pycurl origin-clients
