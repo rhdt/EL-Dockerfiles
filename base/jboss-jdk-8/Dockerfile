@@ -1,4 +1,4 @@
-FROM quay.io/openshiftio/rhel-base-pcp:latest
+FROM registry.access.redhat.com/rhel7
 
 # Install packages necessary to run EAP
 RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
