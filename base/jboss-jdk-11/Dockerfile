@@ -1,10 +1,10 @@
-FROM quay.io/openshiftio/rhel-base-pcp:latest
+FROM registry.access.redhat.com/rhel7
 
 # Install packages necessary to run EAP
 RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
     yum-config-manager --enable rhel-7-server-optional-rpms && \
     yum update -y && \
-    yum -y install git xmlstarlet saxon augeas bsdtar zip unzip java-11-openjdk-devel gettext openssl patch awscli maven wget && \
+    yum -y install git xmlstarlet saxon augeas bsdtar zip unzip java-11-openjdk-devel gettext openssl patch awscli wget && \
     yum clean all
 
 # Create a user and group used to launch processes
