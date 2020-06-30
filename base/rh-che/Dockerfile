@@ -1,4 +1,4 @@
-FROM quay.io/openshiftio/rhel-base-jboss-jdk-8:latest
+FROM quay.io/openshiftio/rhel-base-jboss-jdk-11:latest
 
 # The following lines are needed to set the correct locale after `yum update`
 # c.f. https://github.com/CentOS/sig-cloud-instance-images/issues/71
