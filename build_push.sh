@@ -16,9 +16,6 @@ fi
 
 QUAY_TAG="quay.io/openshiftio/rhel-base-${IMAGE_NAME}:latest"
 
-# in case we need to pull private images
-docker login -u $QUAY_USER -p $QUAY_TOKEN quay.io
-
 docker build --pull "${NO_CACHE_CMD}" \
   -t "${QUAY_TAG}" \
   .
